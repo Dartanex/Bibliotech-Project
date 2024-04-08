@@ -1,7 +1,15 @@
 <?php
 
     require_once('ILibraryElements.php');
-   class Books implements ILibraryElements{
+    require_once('author.service.php');
+    require_once('category.service.php');
+
+    trait ExtendCategory{
+        protected $categoryName;
+
+
+    }
+   class Books extends Authors implements ILibraryElements{
 
         private $bookId;
         public $bookTitle;
@@ -57,12 +65,23 @@
             array_push($this->booksArray, $book );
         }
 
-        public function updateElement($elementName){
-
+        public function updateElement($elementName, $updatedInformation){
+            foreach ($this->booksArray as $book){
+                if($book->bookTitle == $elementName){
+                    $book = $updatedInformation;
+                }
+            }
         }
 
         public function deleteElement($elementName){
-
+            foreach ($this->booksArray as $key => $book) {
+                if($book->bookTitle == $elementName){
+                    // Remove the autor from the array
+                    unset($this->booksArray[$key]);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public function searchBook(){

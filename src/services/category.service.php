@@ -5,10 +5,10 @@
         private $categoryId;
         protected $categoryName;
 
-        private $categories;
+        private $categoriesArray;
 
         public function __construct($categoriesArray){
-            $this->categories = $categoriesArray;
+            $this->categoriesArray= $categoriesArray;
         }
 
         public function setCategory($categoryId, $CategoryName){
@@ -22,7 +22,7 @@
                     "categoryId" => $this->categoryId,
                     "categoryName" => $this->categoryName
                 ];
-                array_push($this->categories, $category);
+                array_push($this->categoriesArray, $category);
                 echo "<br>";
                 echo "Categoria creada exitosamente";
                 echo "<br>";
@@ -32,16 +32,27 @@
             }
         }
 
-        public function updateElement($elementName){
-
+        public function updateElement($elementName, $updatedInformation){
+            foreach ($this->categoriesArray as $category){
+                if($category->categoryName == $elementName){
+                    $category = $updatedInformation;
+                }
+            }
         }
 
         public function deleteElement($elementName){
-
+            foreach ($this->categoriesArray as $key => $category) {
+                if($category->categoryName == $elementName){
+                    // Remove the autor from the array
+                    unset($this->categoriesArray[$key]);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public function getCategories(){
-            foreach ($this->categories as $category){
+            foreach ($this->categoriesArray as $category){
                 echo "<br>";
                 echo "Id de la categoria: " . $category->categoryId . ", Categoría: " . $category->categoryName;
             }

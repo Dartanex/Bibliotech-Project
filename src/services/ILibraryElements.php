@@ -3,7 +3,7 @@
         
         public function createElement();
 
-        public function updateElement($elementName);
+        public function updateElement($elementName, $undatedInformation);
 
         public function deleteElement($elementName);
     }

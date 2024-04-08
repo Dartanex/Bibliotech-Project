@@ -4,7 +4,7 @@
 
         private $authorId;
         protected $authorName;
-        public $authorNationality;
+        protected $authorNationality;
 
         public $authorsArray;
 
@@ -36,12 +36,26 @@
             }
         }
 
-        public function updateElement($elementName){
-
+        function updateElement($elementName, $updatedInformation){
+            foreach ($this->authorsArray as $author){
+                if($author->authorName == $elementName){
+                    $author = $updatedInformation;
+                    echo "<br>";
+                    echo "Información del autor modificada exitosamente...";
+                    break;
+                }
+            }
         }
 
         public function deleteElement($elementName){
-
+            foreach ($this->authorsArray as $key => $author) {
+                if($author->authorName == $elementName){
+                    // Remove the autor from the array
+                    unset($this->authorsArray[$key]);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public function getAuthors(){
@@ -76,6 +90,20 @@
     $contarAutores = count($autor->authorsArray);
     echo "<br><br>";
     echo "Cantidad de autores en el arreglo: " . $contarAutores;
+    echo "<br><br>";
+
+    $authorName = "CHRISTINA ROSSETTI";
+    if($autor->deleteElement($authorName)){
+        echo "<br><br>";
+        echo "El autor: " . $authorName . " fue eliminado de la lista de autores satisfactoriamente";
+        echo "<br><br>";
+    } else {
+        echo "<br><br>";
+        echo "El autor : " . $authorName . " No se encuentra en el lista de autores";
+        echo "<br><br>";
+    }
+
+    $autor->getAuthors();
 
 
 

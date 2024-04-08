@@ -14,7 +14,7 @@
 
         }
 
-        public function updateElement($elementName){
+        public function updateElement($elementName, $updatedInformation){
 
         }
 
