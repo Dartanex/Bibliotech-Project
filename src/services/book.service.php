@@ -24,7 +24,7 @@
         public $copiesBorrowed;
         public $copiesAvailable;
 
-        public $booksArray;
+        private $booksArray;
 
         public function __construct($booksArray){
             $this->booksArray = $booksArray;
@@ -86,6 +86,12 @@
 
         public function searchBook(){
 
+        }
+
+        public function getBooks(){
+            foreach ($this->booksArray as $book){
+                print_r($book);
+            }
         }
    }
 
@@ -149,3 +155,4 @@
 );
 
 $book = new Books($books);
+$book->getBooks();
